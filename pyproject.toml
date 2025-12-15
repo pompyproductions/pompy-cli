@@ -29,5 +29,5 @@ Homepage = "https://github.com/pompyproductions/pompy-cli"
 Repository = "https://github.com/pompyproductions/pompy-cli"
 Issues = "https://github.com/pompyproductions/pompy-cli/issues"
 
-[tool.setuptools.packages. find]
+[tool.setuptools.packages.find]
 where = ["src"]
