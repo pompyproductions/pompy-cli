@@ -36,15 +36,16 @@ def prompt_opt(text=str, options=list[Option]):
     print(text)
 
     display = f"({"|".join([opt.short for opt in options])})"
-    valid = []
-    for opt in options:
-        valid += (opt.short, opt.long, *opt.aliases)
-    user_input = util.get_input(display).lower()
-    while user_input not in valid:
+    user_input = util.get_input(display).strip().lower()
+    if not user_input:
+        print(style("Try entering something.", color=Ansi.FG_RED))
+
+    while True:
+        for opt in options:
+            if user_input in (opt.short, opt.long, *opt.aliases):
+                return opt.long
         print(style("That's not a valid option.", color=Ansi.FG_RED))
         user_input = util.get_input(display).lower()
-
-    return user_input
 
 
 def prompt_int(text=str, *, min:int, max:int):
