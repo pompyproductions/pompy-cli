@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Colors! A `style()` function that "style" a string with ANSI escape sequences.
 - Prompts! You can now `prompt_str` to get any input, `prompt_bool` to get a yes or no, `prompt_int` for a valid integer, and `prompt_opt` to get the user's choice from a list of `Option`s.
+- An optional `context` object you can use as a configurable alternative to the functions.
 - Some utilities: `clear` for clearing the terminal, and `get_input` which just applies default styling to a regular `input` call.
 
 ## [v0.1.0] — Hello World! (2025-12-06)
