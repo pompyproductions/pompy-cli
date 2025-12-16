@@ -13,7 +13,6 @@ def prompt_str(text=str, case_insensitive=False):
     print(style("------", color=Ansi.FG_BLUE))
     print(text)
     user_input = util.get_input("(Enter any string.)")
-    print()
     if case_insensitive:
         return user_input.lower()
     return user_input
@@ -24,7 +23,6 @@ def prompt_bool(text=str):
     print(text)
     user_input = util.get_input("(Y|N)").lower()
     while True:
-        print()
         if user_input in ("y", "yes", "1", "true"):
             return True
         elif user_input in ("n", "no", "0", "false"):
@@ -34,7 +32,6 @@ def prompt_bool(text=str):
 
 
 def prompt_opt(text=str, options=list[Option]):
-    print()
     print(style("------", color=Ansi.FG_BLUE))
     print(text)
 
@@ -50,18 +47,32 @@ def prompt_opt(text=str, options=list[Option]):
     return user_input
 
 
-# Demo
-
-if __name__ == "__main__":
-    util.clear()
-    print("Your name is " + style(prompt_str("What's your name?", True), color=Ansi.BG_YELLOW, decoration=Ansi.BOLD, padding=1))
-    user_input = prompt_bool("Are you gae?")
-    if user_input:
-        print("You are gae")
+def prompt_int(text=str, *, min:int, max:int):
+    print(style("------", color=Ansi.FG_BLUE))
+    print(text)
+    display = "("
+    if min is not None:
+        display += str(min)
+        if max is not None:
+            display += f"-{max})"
+        else:
+            display += " or higher)"
+    elif max is not None:
+        display += f"up to {max})"
     else:
-        print("Who says I'm gae?")
-    user_input = prompt_opt("What will you do?", options=[
-        Option("quit", "q", ("exit", "close"), "Quit the program."),
-        Option("restart", "r")
-    ])
-    print(user_input)
+        display += "any integer)"
+    while True:
+        user_input = util.get_input(display).strip()
+        if not user_input:
+            print(style(f"Try entering something.", color=Ansi.FG_RED))
+            continue
+        try:
+            user_input = int(user_input)
+            if min is not None and user_input < min:
+                print(style(f"Please enter a number bigger than {min}.", color=Ansi.FG_RED))
+            elif max is not None and user_input > max:
+                print(style(f"Please enter a number smaller than {max}.", color=Ansi.FG_RED))
+            else:
+                return user_input
+        except ValueError:
+            print(style("Please only enter numbers.", color=Ansi.FG_RED))
