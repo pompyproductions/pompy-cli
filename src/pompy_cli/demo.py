@@ -3,7 +3,7 @@ from prompt import prompt_str, prompt_bool, prompt_opt, prompt_int, Option
 from style import Ansi, style
 from random import randint
 
-if __name__ == "__main__":
+def demo_prompts():
     end = False
     while not end:
         util.clear()
@@ -30,3 +30,23 @@ if __name__ == "__main__":
         ])
         if user_input == "quit":
             end = True
+
+def demo_context():
+    from CLIContext import CLIContext
+    from Header import Header
+
+    ctx = CLIContext(
+        header=Header("Pompy CLI Demo"),
+        color1=Ansi.FG_GREEN,
+        color2=Ansi.FG_YELLOW,
+        color3=Ansi.FG_CYAN,
+        separator="="
+    )
+    ctx.clear()
+    print("This is a demo of the CLIContext class.")
+    input("Press Enter to continue...")
+
+
+if __name__ == "__main__":
+    demo_context()
+    demo_prompts()
