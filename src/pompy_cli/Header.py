@@ -26,34 +26,33 @@ class Header:
 
     def render(self,*, subtitle="", display_title=True):
         for _ in range(self.borders.top.width):
-            print(
+            print(style(
                 self.borders.top.style[0] +
                 self.borders.top.style[1] * (len(self.title) + self.borders.padding_x * 2) +
                 self.borders.top.style[3]
-            )
+            , color=self.borders.color))
         for _ in range(self.borders.padding_y):
-            print(
+            print(style(
                 self.borders.left.style[2] * self.borders.left.width +
                 " " * (len(self.title) + self.borders.padding_x * 2) +
                 self.borders.right.style[2] * self.borders.right.width
-            )
+            , color=self.borders.color))
         print(
-            self.borders.left.style[2] * self.borders.left.width +
-            self.borders.padding_x * " " +
-            self.title +
-            self.borders.padding_x * " " +
-            self.borders.right.style[2] * self.borders.right.width
+            style(self.borders.left.style[2] * self.borders.left.width +
+            self.borders.padding_x * " ", color=self.borders.color) +
+            style(self.title, color=self.color) +
+            style(self.borders.padding_x * " " +
+            self.borders.right.style[2] * self.borders.right.width, color=self.borders.color)
         )
         for _ in range(self.borders.padding_y):
-            print(
+            print(style(
                 self.borders.left.style[2] * self.borders.left.width +
                 " " * (len(self.title) + self.borders.padding_x * 2) +
                 self.borders.right.style[2] * self.borders.right.width
-            )
+            ), color=self.borders.color)
         for _ in range(self.borders.bottom.width):
-            print(
+            print(style(
                 self.borders.bottom.style[0] +
                 self.borders.bottom.style[1] * (len(self.title) + self.borders.padding_x * 2) +
                 self.borders.bottom.style[3]
-            )
-
+            , color=self.borders.color))
