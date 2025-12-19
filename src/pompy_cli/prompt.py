@@ -9,13 +9,23 @@ class Option:
         self.description = description
 
 
-def prompt_str(text:str="", case_insensitive=False, ctx:bool=False):
+def prompt_str(text:str="", *, ctx:bool=False, 
+        case_sensitive=False, accept_empty=False, trim=True, min=0
+        ):
     if not ctx and text:
         print(text)
-    user_input = util.get_input("(Enter any string.)")
-    if case_insensitive:
-        return user_input.lower()
-    return user_input
+    while True:
+        user_input = util.get_input("(Enter any string.)")
+        if trim:
+            user_input = user_input.strip()
+        if not accept_empty and not user_input:
+            print(style("Try entering something.", color=Ansi.FG_RED))
+        elif len(user_input) < min:
+            print(style(f"Please enter at least {min} characters.", color=Ansi.FG_RED))
+        elif not case_sensitive:
+            return user_input.lower()
+        else:
+            return user_input
 
 
 def prompt_bool(text=str):
