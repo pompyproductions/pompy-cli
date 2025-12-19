@@ -31,22 +31,6 @@ def demo_prompts():
         if user_input == "quit":
             end = True
 
-def demo_context():
-    from CLIContext import CLIContext
-    from Header import Header
-
-    ctx = CLIContext(
-        header=Header("Pompy CLI Demo"),
-        color1=Ansi.FG_GREEN,
-        color2=Ansi.FG_YELLOW,
-        color3=Ansi.FG_CYAN,
-        separator="="
-    )
-    ctx.clear()
-    print("This is a demo of the CLIContext class.")
-    input("Press Enter to continue...")
-
 
 if __name__ == "__main__":
-    demo_context()
     demo_prompts()

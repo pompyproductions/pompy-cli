@@ -9,9 +9,9 @@ class Option:
         self.description = description
 
 
-def prompt_str(text=str, case_insensitive=False):
-    print(style("------", color=Ansi.FG_BLUE))
-    print(text)
+def prompt_str(text:str="", case_insensitive=False, ctx:bool=False):
+    if not ctx and text:
+        print(text)
     user_input = util.get_input("(Enter any string.)")
     if case_insensitive:
         return user_input.lower()
@@ -19,7 +19,6 @@ def prompt_str(text=str, case_insensitive=False):
 
 
 def prompt_bool(text=str):
-    print(style("------", color=Ansi.FG_BLUE))
     print(text)
     user_input = util.get_input("(Y|N)").lower()
     while True:
@@ -32,7 +31,6 @@ def prompt_bool(text=str):
 
 
 def prompt_opt(text=str, options=list[Option]):
-    print(style("------", color=Ansi.FG_BLUE))
     print(text)
 
     display = f"({"|".join([opt.short for opt in options])})"
@@ -49,7 +47,6 @@ def prompt_opt(text=str, options=list[Option]):
 
 
 def prompt_int(text=str, *, min:int, max:int):
-    print(style("------", color=Ansi.FG_BLUE))
     print(text)
     display = "("
     if min is not None:
