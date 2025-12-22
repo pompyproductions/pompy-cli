@@ -4,8 +4,6 @@ from Header import Header
 from prompt import Option
 
 def demo_context():
-
-
     ctx = CLIContext(
         header=Header("Pompy CLI Demo"),
         color2=Ansi.FG_BLUE,

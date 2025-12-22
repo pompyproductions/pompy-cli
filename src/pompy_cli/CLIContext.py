@@ -7,11 +7,11 @@ from Header import Header
 class CLIContext:
     def __init__(
             self, *, 
-            header=None, 
-            color1=None,
-            color2=Ansi.FG_CYAN,
-            color3=Ansi.FG_PURPLE,
-            separator="-"
+            header: Header | None = None, 
+            color1: str = "",
+            color2: str = Ansi.FG_CYAN,
+            color3: str = Ansi.FG_PURPLE,
+            separator: str = "-"
             ):
         self.color1 = color1
         self.color2 = color2
@@ -26,7 +26,7 @@ class CLIContext:
             self.header.render()
         self.is_cleared = True
     
-    def input(self, text, *, allow_empty=False):
+    def input(self, text:str, *, allow_empty:bool=False):
         util.get_input(text, color=self.color3, allow_empty=allow_empty)
     
     def print(self, str, *, 
