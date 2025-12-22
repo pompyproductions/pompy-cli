@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from .prompt import prompt_str, prompt_bool, prompt_int, prompt_opt, Option
 from .style import Ansi, style
