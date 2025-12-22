@@ -1,4 +1,5 @@
 import prompt
+from prompt import Option
 import util
 from style import Ansi, style
 from Header import Header
@@ -25,8 +26,8 @@ class CLIContext:
             self.header.render()
         self.is_cleared = True
     
-    def input(self, text):
-        util.get_input(text, color=self.color3)
+    def input(self, text, *, allow_empty=False):
+        util.get_input(text, color=self.color3, allow_empty=allow_empty)
     
     def print(self, str, *, 
             separate=False, clear=False, color=None,
@@ -48,10 +49,30 @@ class CLIContext:
             print(style(self.separator * 40, color=self.color2) + "\n")
     
     def prompt_str(self, text, *,
-            accept_empty=False, case_sensitive=False, trim=True,
+            allow_empty=False, case_sensitive=False, trim=True,
             separate=False, clear=False, color=None,
         ):
         self.print(text, separate=separate, clear=clear, color=color)
         return prompt.prompt_str(
-            ctx=True, case_sensitive=case_sensitive, trim=trim, accept_empty=accept_empty
+            ctx=True, case_sensitive=case_sensitive, trim=trim, allow_empty=allow_empty
             )
+
+    def prompt_bool(self, text, *,
+            separate=False, clear=False, color=None,
+        ):
+        self.print(text, separate=separate, clear=clear, color=color)
+        return prompt.prompt_bool(ctx=True)
+
+    def prompt_int(self, text, *, 
+            min:int=0, max:int=None,
+            separate=False, clear=False, color=None,
+        ):
+        self.print(text, separate=separate, clear=clear, color=color)
+        return prompt.prompt_int(ctx=True, min=min, max=max)
+    
+    def prompt_opt(self, text, *, 
+            options:list[Option],
+            separate=False, clear=False, color=None,
+        ):
+        self.print(text, separate=separate, clear=clear, color=color)
+        return prompt.prompt_opt(ctx=True, options=options)
