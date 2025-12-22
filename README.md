@@ -9,17 +9,9 @@ pip install pompy-cli
 
 ## Usage
 
-```python
-from pompy_cli import hello
+More detailed documentation later.  
+For now, you can check the `demo_basic.py` and `demo_context.py` to see what you can do with pompy_cli.
 
-hello("Hi there!")
-```
-
-**Output:**
-```
-Hello, World!
-You said: Hi there! 
-```
 
 ## Requirements
 
@@ -31,7 +23,7 @@ You said: Hi there!
 
 ```bash
 # Clone the repository
-git clone https://github.com/erengazioglu/pompy-cli.git
+git clone https://github.com/pompyproductions/pompy-cli.git
 cd pompy-cli
 
 # Create virtual environment
