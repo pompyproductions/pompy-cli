@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from style import style, Ansi
+from pompy_cli.style import style, Ansi
 
 @dataclass
 class Line:

@@ -1,8 +1,7 @@
-import prompt
-from prompt import Option
-import util
-from style import Ansi, style
-from Header import Header
+from pompy_cli import util
+from pompy_cli.prompt import Option, prompt_bool, prompt_int, prompt_opt, prompt_str
+from pompy_cli.Header import Header
+from pompy_cli.style import Ansi, style
 
 class CLIContext:
     def __init__(
@@ -53,7 +52,7 @@ class CLIContext:
             separate=False, clear=False, color=None,
         ):
         self.print(text, separate=separate, clear=clear, color=color)
-        return prompt.prompt_str(
+        return prompt_str(
             ctx=True, case_sensitive=case_sensitive, trim=trim, allow_empty=allow_empty
             )
 
@@ -61,18 +60,18 @@ class CLIContext:
             separate=False, clear=False, color=None,
         ):
         self.print(text, separate=separate, clear=clear, color=color)
-        return prompt.prompt_bool(ctx=True)
+        return prompt_bool(ctx=True,)
 
     def prompt_int(self, text, *, 
             min:int=0, max:int=None,
             separate=False, clear=False, color=None,
         ):
         self.print(text, separate=separate, clear=clear, color=color)
-        return prompt.prompt_int(ctx=True, min=min, max=max)
+        return prompt_int(ctx=True, min=min, max=max)
     
     def prompt_opt(self, text, *, 
             options:list[Option],
             separate=False, clear=False, color=None,
         ):
         self.print(text, separate=separate, clear=clear, color=color)
-        return prompt.prompt_opt(ctx=True, options=options)
+        return prompt_opt(ctx=True, options=options)

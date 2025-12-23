@@ -1,8 +1,8 @@
-from style import style, Ansi
+from pompy_cli import util
+from pompy_cli.style import style, Ansi
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 import sys
-import util
 
 @dataclass
 class Option:
@@ -42,7 +42,7 @@ def prompt_str(text:str="", *, ctx:bool=False,
             return user_input
 
 
-def prompt_bool(text:str, *, ctx:bool=False):
+def prompt_bool(text:str="", *, ctx:bool=False):
     if not ctx and text:
         print(text)
     user_input = util.get_input("[y, n]").strip().lower()
@@ -55,7 +55,7 @@ def prompt_bool(text:str, *, ctx:bool=False):
         user_input = util.get_input("(Y|N)").strip().lower()
 
 
-def prompt_opt(text=str, *, ctx:bool=False, 
+def prompt_opt(text:str="", *, ctx:bool=False, 
         options=list[Option], help:bool=True, quit:bool=True
         ):
     if not ctx and text:
@@ -84,8 +84,11 @@ def prompt_opt(text=str, *, ctx:bool=False,
         print(style("That's not a valid option.", color=Ansi.FG_RED))
 
 
-def prompt_int(text=str, *, min:int, max:int):
-    print(text)
+def prompt_int(text:str="", *, ctx:bool=False, 
+        min:int, max:int
+        ):
+    if not ctx and text:
+        print(text)
     display = "["
     if min is not None:
         display += str(min)
