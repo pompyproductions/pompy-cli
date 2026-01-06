@@ -42,20 +42,20 @@ def prompt_str(text:str="", prompt:str="[Enter any string.]", *, ctx:bool=False,
             return user_input
 
 
-def prompt_bool(text:str="", *, ctx:bool=False):
+def prompt_bool(text:str="", prompt:str="[y, n]", *, ctx:bool=False):
     if not ctx and text:
         print(text)
-    user_input = util.get_input("[y, n]").strip().lower()
+    user_input = util.get_input(prompt).strip().lower()
     while True:
         if user_input in ("y", "yes", "1", "true"):
             return True
         elif user_input in ("n", "no", "0", "false"):
             return False
         print(style("It's a yes or no question.", color=Ansi.FG_RED))
-        user_input = util.get_input("(Y|N)").strip().lower()
+        user_input = util.get_input(prompt).strip().lower()
 
 
-def prompt_opt(text:str="", *, ctx:bool=False, 
+def prompt_opt(text:str="", prompt:str="", *, ctx:bool=False, 
         options=list[Option], help:bool=True, quit:bool=True
         ):
     if not ctx and text:
@@ -69,6 +69,8 @@ def prompt_opt(text:str="", *, ctx:bool=False,
             Option("quit", "q", ("exit", "close"), "Quit the program.")
         )
     display = f"[{", ".join([opt.short.upper() for opt in options])}]"
+    if prompt:
+        display = prompt
     
     while True:
         user_input = util.get_input(display).strip().lower()
@@ -84,22 +86,25 @@ def prompt_opt(text:str="", *, ctx:bool=False,
         print(style("That's not a valid option.", color=Ansi.FG_RED))
 
 
-def prompt_int(text:str="", *, ctx:bool=False, 
+def prompt_int(text:str="", prompt:str="", *, ctx:bool=False, 
         min:int, max:int
         ):
     if not ctx and text:
         print(text)
     display = "["
-    if min is not None:
-        display += str(min)
-        if max is not None:
-            display += f"-{max}]"
-        else:
-            display += " or higher]"
-    elif max is not None:
-        display += f"up to {max}]"
+    if prompt:
+        display = prompt
     else:
-        display += "any integer]"
+        if min is not None:
+            display += str(min)
+            if max is not None:
+                display += f"-{max}]"
+            else:
+                display += " or higher]"
+        elif max is not None:
+            display += f"up to {max}]"
+        else:
+            display += "any integer]"
     while True:
         user_input = util.get_input(display).strip()
         if not user_input:

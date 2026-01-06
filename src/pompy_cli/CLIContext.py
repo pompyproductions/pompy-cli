@@ -39,10 +39,10 @@ class CLIContext:
         elif separate:
             self.print_separator()
         if color:
-            str = style(str, color=color, padding=padding)
+            text = style(text, color=color, padding=padding)
         elif self.color1:
-            str = style(str, color=self.color1, padding=padding)
-        print(str)
+            text = style(text, color=self.color1, padding=padding)
+        print(text)
         self.is_cleared = False
 
     def print_separator(self):
@@ -56,25 +56,29 @@ class CLIContext:
         if text:
             self.print(text, separate=separate, clear=clear, color=color)
         return prompt_str(
+            prompt=prompt,
             ctx=True, case_sensitive=case_sensitive, trim=trim, allow_empty=allow_empty
             )
 
-    def prompt_bool(self, text, *,
+    def prompt_bool(self, text:str="", prompt:str="", *,
             separate=False, clear=False, color=None,
         ):
-        self.print(text, separate=separate, clear=clear, color=color)
-        return prompt_bool(ctx=True,)
+        if text:
+            self.print(text, separate=separate, clear=clear, color=color)
+        return prompt_bool(prompt=prompt, ctx=True)
 
-    def prompt_int(self, text, *, 
+    def prompt_int(self, text:str="", prompt:str="", *, 
             min:int=0, max:int=None,
             separate=False, clear=False, color=None,
         ):
-        self.print(text, separate=separate, clear=clear, color=color)
-        return prompt_int(ctx=True, min=min, max=max)
+        if text:
+            self.print(text, separate=separate, clear=clear, color=color)
+        return prompt_int(prompt=prompt, ctx=True, min=min, max=max)
     
-    def prompt_opt(self, text, *, 
+    def prompt_opt(self, text:str="", prompt:str="", *, 
             options:list[Option],
             separate=False, clear=False, color=None,
         ):
-        self.print(text, separate=separate, clear=clear, color=color)
-        return prompt_opt(ctx=True, options=options)
+        if text:
+            self.print(text, separate=separate, clear=clear, color=color)
+        return prompt_opt(prompt=prompt, ctx=True, options=options)
