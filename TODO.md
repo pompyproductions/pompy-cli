@@ -6,6 +6,7 @@ None! Just focus on development one minor update at a time.
 
 ## Next minor update (0.3.0)
 
+- Have "prompt" separate from "text" in `CLIContext.prompt()`, and allow for blanks on each.
 - Make `CLIContext.input()` or `util.input()` prompt "Press any key to continue". 
 - Make hidden and default options available for all prompts (`help`, `quit`)
 - Place demos in a separate folder (outside src), so that people can see how it's imported and used.

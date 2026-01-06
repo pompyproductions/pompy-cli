@@ -23,13 +23,13 @@ def display_help(options:Iterable[Option]):
         print(opt)
 
 
-def prompt_str(text:str="", *, ctx:bool=False, 
+def prompt_str(text:str="", prompt:str="[Enter any string.]", *, ctx:bool=False, 
         case_sensitive:bool=False, allow_empty:bool=False, trim:bool=True, min:int=0
         ):
     if not ctx and text:
         print(text)
     while True:
-        user_input = util.get_input("[Enter any string.]")
+        user_input = util.get_input(prompt)
         if trim:
             user_input = user_input.strip()
         if not allow_empty and not user_input:

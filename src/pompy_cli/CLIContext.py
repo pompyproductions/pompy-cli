@@ -25,10 +25,12 @@ class CLIContext:
             self.header.render()
         self.is_cleared = True
     
-    def input(self, text:str, *, allow_empty:bool=False):
-        util.get_input(text, color=self.color3, allow_empty=allow_empty)
+    def input(self, prompt:str="", *, 
+            allow_empty:bool=False
+        ):
+        util.get_input(prompt, color=self.color3, allow_empty=allow_empty)
     
-    def print(self, str, *, 
+    def print(self, text:str="", *, 
             separate=False, clear=False, color=None,
             padding=0
         ):
@@ -47,11 +49,12 @@ class CLIContext:
         if self.separator:
             print(style(self.separator * 40, color=self.color2) + "\n")
     
-    def prompt_str(self, text, *,
+    def prompt_str(self, text:str="", prompt:str="", *,
             allow_empty=False, case_sensitive=False, trim=True,
             separate=False, clear=False, color=None,
         ):
-        self.print(text, separate=separate, clear=clear, color=color)
+        if text:
+            self.print(text, separate=separate, clear=clear, color=color)
         return prompt_str(
             ctx=True, case_sensitive=case_sensitive, trim=trim, allow_empty=allow_empty
             )
